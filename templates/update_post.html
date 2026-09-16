@@ -11,11 +11,11 @@
                     </div>
                 </div>
                 <div class="content">
-                    <form action="{{ url_for('add_post') }}" method="post">
+                    <form action="{{ url_for('update_post', id = post.id) }}" method="post">
                         <div class="field">
                             <label class="label">Titulo:</label>
                             <div class="control">
-                                <input class="input" type="text" name='title'>
+                                <input class="input" type="text" name='title' value="{{post.title}}">
                             </div>
                         </div>
                         <div class="field">
@@ -24,7 +24,9 @@
                                 <div class="select">
                                     <select name="category_id">
                                         {% for category in categories %}
-                                        <option value="{{ category.id }}">{{ category.name }}</option>
+                                        <option value="{{ category.id }}" {% if category.id == post.category_id %}selected{% endif %}>
+                                            {{ category.name }}
+                                        </option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -33,12 +35,11 @@
                         <div class="field">
                             <label class="label">Contenido:</label>
                             <div class="control">
-                                <textarea class="textarea" name="content"></textarea>
+                                <textarea class="textarea" name="content" >{{post.content}}</textarea>
                             </div>
                         </div>
-                        <button class="button is-success " type="submit">Agregar</button>
+                        <button class="button is-success " type="submit">Actualizar</button>
                         <a class="button is-danger" href="{{ url_for('index') }}">Cancelar</a>
-                        
                     </form>
                 </div>
             </div>
